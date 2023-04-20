@@ -24,7 +24,7 @@
 	<article>
 		<p><?php echo $post->text; ?></p>
 		<img src="https://picsum.photos/300/200?random=<?php echo rand(1, 10000); ?>" alt="">
-		<div><a href="#" data-id="<?php echo $post->id; ?>" class="like">Like</a> <span class='likes'><?php echo $post->getLikes(); ?></span> people like this </div>
+		<div><a href="#" data-id="<?php echo $post->id; ?>" class="like">Like</a> <span class='likes' id="counter<?php echo $post->id ?>"><?php echo $post->getLikes(); ?></span> people like this </div>
 	</article>
 	<?php endforeach; ?>
 	<script>
@@ -35,6 +35,9 @@
 				e.preventDefault();
 				//get data-id attribute
 				let id = this.getAttribute("data-id");
+				//get counter element
+				let counter = document.querySelector("#counter" + id);
+
 				//fetch request (POST) to '/ajax/like.php', use formdata
 				let formData = new FormData();
 				formData.append("id", id);
@@ -45,8 +48,9 @@
 				.then(function(response){
 					return response.json();
 				})
-				.then(function(data){
-					console.log(json);
+				.then(function(json){
+					//update counter
+					counter.innerHTML = json.likes;
 				})
 
 			});
