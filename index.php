@@ -52,7 +52,6 @@
 					//update counter
 					counter.innerHTML = json.likes;
 				})
-
 			});
 		}
 	</script>
