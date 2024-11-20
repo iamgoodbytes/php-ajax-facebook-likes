@@ -22,9 +22,10 @@
                 $database = $config['database'];
                 $user = $config['user'];
                 $password = $config['password'];
+                $host = $config['host'];
 
                 //echo "💥";
-                self::$conn = new PDO('mysql:host=mysql.railway.internal;dbname='.$database.';charset=utf8mb4', $user, $password);
+                self::$conn = new PDO('mysql:host='.$host.';dbname='.$database.';charset=utf8mb4', $user, $password);
                 return self::$conn;
             }
         }
